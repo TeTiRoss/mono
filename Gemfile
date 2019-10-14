@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'httparty'
 gem 'money-rails', '~>1.12'
-gem 'sidekiq'
+gem 'sidekiq', '~>5.2'
 gem 'sidekiq-scheduler'
 
 # Reduces boot times through caching; required in config/boot.rb
