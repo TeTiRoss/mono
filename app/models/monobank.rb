@@ -15,7 +15,10 @@ class Monobank
     self.class.get('/personal/client-info', @options)
   end
 
-  def statement account, from, to
+  def statement account:, from:, to: Time.current
+    from = from.to_i
+    to   = to.to_i
+
     self.class.get("/personal/statement/#{account}/#{from}/#{to}", @options)
   end
 end
