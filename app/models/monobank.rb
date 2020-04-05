@@ -15,7 +15,7 @@ class Monobank
     self.class.get('/personal/client-info', @options)
   end
 
-  def statement account:, from:, to: Time.current
+  def statement account: Rails.application.credentials[:base_account_id], from:, to: Time.current
     from = from.to_i
     to   = to.to_i
 
