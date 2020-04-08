@@ -2,6 +2,6 @@
 
 namespace :transaction do
   task collect: :environment do
-    TransactionsFetchWorker.perform_async
+    TransactionsFetchWorker.new.perform
   end
 end
