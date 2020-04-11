@@ -1,35 +1,22 @@
-<% @currency.each do |currency| %>
-  <p><%= currency.inspect %></p>
-<% end %>
-
-
 <table class="table table-striped table-dark">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">currencyCodeA</th>
+      <th scope="col">currencyCodeB</th>
+      <th scope="col">date</th>
+      <th scope="col">rateBuy</th>
+      <th scope="col">rateSell</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    <% @currency.each do |currency| %>
+      <tr>
+        <td><%= currency['currencyCodeA'] %></td>
+        <td><%= currency['currencyCodeB'] %></td>
+        <td><%= currency['date'] %></td>
+        <td><%= currency['rateBuy'] %></td>
+        <td><%= currency['rateSell'] %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
