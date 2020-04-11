@@ -1,5 +1,15 @@
 class HomeController < ApplicationController
   def index
-    @currency = Monobank.new.currency
+  	@currencies = currencies
+  end
+
+  private
+
+  def currencies
+  	currencies_response.success? ? currencies_response : []
+  end
+
+  def currencies_response
+  	@currencies_response ||= Monobank.new.currency
   end
 end
