@@ -1,5 +1,5 @@
 <table class="table table-striped table-dark">
-  <% if @currencies.present? %>
+  <% if @currency_rates.present? %>
     <thead>
       <tr>
         <th scope="col"></th>
@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @currencies.each do |currency| %>
+      <% @currency_rates.each do |currency| %>
         <tr>
           <td><%= currency_name(currency['currencyCodeA']) %></td>
           <td><%= currency_name(currency['currencyCodeB']) %></td>
@@ -30,4 +30,3 @@
     </tbody>
   <% end %>
 </table>
-

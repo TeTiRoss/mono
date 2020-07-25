@@ -2,7 +2,7 @@ class CurrencyRatesFetchWorker
   include Sidekiq::Worker
 
   def perform
-  	response = Monobank.new.currency
+  	response = Monobank.new.currency_rates
 
   	raise 'Invalid response' unless response.success?
 
