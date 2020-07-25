@@ -7,7 +7,7 @@ class Monobank
     @options = { headers: { 'X-Token' => Rails.application.credentials[:api_key] } }
   end
 
-  def currency
+  def currency_rates
     self.class.get('/bank/currency', @options)
   end
 
