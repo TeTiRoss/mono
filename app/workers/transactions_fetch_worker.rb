@@ -1,8 +1,10 @@
 class TransactionsFetchWorker
   include Sidekiq::Worker
 
-  def perform
-  	response = Monobank.new.statement(from: 1.day.ago)
+  def perform(time_from)
+		time_from ||= 1.day.ago
+
+  	response = Monobank.new.statement(from: time_from)
 
   	raise 'Invalid response' unless response.success?
 
