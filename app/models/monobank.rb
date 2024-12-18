@@ -19,6 +19,20 @@ class Monobank
     from = from.to_i
     to   = to.to_i
 
-    self.class.get("/personal/statement/#{account}/#{from}/#{to}", @options)
+    retries = 0
+    max_retries = 5
+    loop do
+      response = self.class.get("/personal/statement/#{account}/#{from}/#{to}", @options)
+
+      if !response.success? && response['errorDescription'] && response['errorDescription'] == 'Too many requests'
+        puts 'sleep time'
+        raise 'Retry limit reached' if retries >= max_retries
+        retries += 1
+
+        sleep(30)
+      else
+        return response
+      end
+    end
   end
 end
