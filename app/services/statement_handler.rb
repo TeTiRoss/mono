@@ -1,5 +1,5 @@
 class StatementHandler
-  def self.get_statements(account: Rails.application.credentials[:base_account_id], from:, to: Time.current)
+  def get_statements(account: Rails.application.credentials[:base_account_id], from:, to: Time.current)
     statements = fetch_by_time(from: from, to: to)
 
     statements.flatten
