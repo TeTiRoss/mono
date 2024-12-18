@@ -13,7 +13,6 @@ class StatementHandler
     statements = []
 
     if date_range >= 31
-      puts 'inside #fetch_by_time loop'
       new_to = from + 31.days
       # refactor candidate --
       statements << fetch_statements_by_count(from: from, to: new_to)
