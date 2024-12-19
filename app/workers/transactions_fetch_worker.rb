@@ -1,10 +1,11 @@
 class TransactionsFetchWorker
   include Sidekiq::Worker
 
-  def perform(time_from)
+  def perform(time_from, time_to)
 		time_from ||= 1.day.ago
+		time_to   ||= Time.current
 
-  	response = StatementHandler.new.get_statements from: time_from
+  	response = StatementHandler.new.get_statements from: time_from, to: time_to
 
   	response.each_slice(1_000) do |slice|
 			slice.each do |transaction|
