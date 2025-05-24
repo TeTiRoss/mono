@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
   def index
-  	@transactions = Transaction.first(100)
+  	@transactions = Transaction.last(50)
   end
 end
