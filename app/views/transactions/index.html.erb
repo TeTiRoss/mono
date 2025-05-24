@@ -11,7 +11,7 @@
       <tr>
         <td><%= currency_date(transaction.raw_data['time']) %> </td>
         <td><%= transaction.raw_data['description'] %></td>
-        <td><%= (transaction.raw_data['amount'] / 100.0).round(2) * -1 %></td>
+        <td><%= (transaction.raw_data['amount'] / 100.0).round(2) %></td>
       </tr>
     <% end %>
   </tbody>
