@@ -1,3 +1,18 @@
-<% @transactions.each do |transaction| %>
-  <p> <%= transaction.raw_data %> </p>
-<% end %>
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Time</th>
+      <th scope="col">Description</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= l Time.at(transaction.raw_data['time']).in_time_zone, format: :short %> </td>
+        <td><%= transaction.raw_data['description'] %></td>
+        <td><%= (transaction.raw_data['amount'] / 100.0).round(2) * -1 %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

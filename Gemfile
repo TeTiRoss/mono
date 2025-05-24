@@ -27,6 +27,8 @@ gem 'httparty'
 gem 'money-rails'
 gem 'sidekiq'
 
+gem 'bootstrap'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
