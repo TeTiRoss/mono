@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   root 'currency_rates#index'
 
-  resources :transactions, only: :index
+  resources :transactions, only: :index do
+    post :sync, on: :collection
+  end
 end
