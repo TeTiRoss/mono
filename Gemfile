@@ -26,8 +26,8 @@ gem 'jbuilder'
 gem 'httparty'
 gem 'money-rails'
 gem 'sidekiq'
-
 gem 'bootstrap'
+gem 'pagy', '~> 9.3'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false

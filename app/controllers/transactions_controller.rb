@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
   def index
-  	@transactions = Transaction.order(time: :desc).first(50)
+    @pagy, @transactions = pagy(Transaction.order(time: :desc))
   end
 end

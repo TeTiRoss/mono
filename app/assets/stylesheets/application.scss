@@ -1,2 +1,32 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+
+.pagination .page-link {
+  background-color: #343a40; /* Bootstrap dark background */
+  color: #fff;
+  border-color: #454d55;
+}
+
+.pagination .page-link:hover {
+  background-color: #495057;
+  color: #fff;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #212529;
+  border-color: #343a40;
+}
+
+.pagination .page-item:first-child .page-link {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.pagination .page-item:last-child .page-link {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+body {
+  margin: 10px;
+}
