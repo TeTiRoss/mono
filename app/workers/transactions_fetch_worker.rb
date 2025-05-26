@@ -11,6 +11,7 @@ class TransactionsFetchWorker
 			slice.each do |transaction|
 				Transaction.find_or_initialize_by(mono_id: transaction['id']) do |new_transcation|
 					new_transcation.raw_data = transaction
+					new_transcation.time = transaction['time']
 					new_transcation.save!
 				end
 			end

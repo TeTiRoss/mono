@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
   end
 
   def sync
-    TransactionsFetchWorker.new.perform 1.weeks.ago, Time.current
+    TransactionsFetchWorker.new.perform 1.week.ago, Time.current
 
     redirect_to transactions_path, notice: "Sync completed successfully."
   end
