@@ -19,7 +19,8 @@
       <tr>
         <td><%= currency_date(transaction.time_int) %> </td>
         <td><%= transaction.description %></td>
-        <td><%= transaction.mcc %></td>
+
+        <td><%= "#{MCC.code(transaction.mcc)&.usda_description} #{transaction.mcc}" %></td>
         <td><%= Money.from_cents(transaction.amount, 'UAH').format %></td>
       </tr>
     <% end %>

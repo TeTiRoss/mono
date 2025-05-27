@@ -127,6 +127,7 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.4)
+    mcc-ruby (1.0.1)
     method_source (1.1.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
@@ -284,6 +285,7 @@ DEPENDENCIES
   importmap-rails (~> 2.1)
   jbuilder
   listen
+  mcc-ruby
   money-rails
   pagy (~> 9.3)
   pg

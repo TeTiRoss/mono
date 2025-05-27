@@ -28,6 +28,7 @@ gem 'money-rails'
 gem 'sidekiq'
 gem 'bootstrap'
 gem 'pagy', '~> 9.3'
+gem 'mcc-ruby'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
