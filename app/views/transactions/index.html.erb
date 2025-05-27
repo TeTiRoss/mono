@@ -1,3 +1,10 @@
+<%= form_with url: transactions_path, method: :get, local: true, class: "mb-3" do %>
+  <div class="input-group">
+    <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search by description..." %>
+    <button class="btn btn-outline-dark" type="submit">Search</button>
+  </div>
+<% end %>
+
 <table class="table table-hover table-striped table-dark">
   <thead>
     <tr>
@@ -9,8 +16,8 @@
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= currency_date(transaction.raw_data['time']) %> </td>
-        <td><%= transaction.raw_data['description'] %></td>
+        <td><%= currency_date(transaction.time) %> </td>
+        <td><%= transaction.description %></td>
         <td><%= (transaction.raw_data['amount'] / 100.0).round(2) %></td>
       </tr>
     <% end %>

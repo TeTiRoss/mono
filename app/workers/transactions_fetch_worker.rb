@@ -12,6 +12,7 @@ class TransactionsFetchWorker
 				Transaction.find_or_initialize_by(mono_id: transaction['id']) do |new_transcation|
 					new_transcation.raw_data = transaction
 					new_transcation.time = transaction['time']
+					new_transcation.description = transaction['description']
 					new_transcation.save!
 				end
 			end

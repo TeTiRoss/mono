@@ -1,6 +1,9 @@
 class TransactionsController < ApplicationController
   def index
-    @pagy, @transactions = pagy(Transaction.order(time: :desc))
+    transactions = Transaction.order(time: :desc)
+    transactions = transactions.where("description ILIKE :q", q: "%#{params[:query]}%") if params[:query].present?
+
+    @pagy, @transactions = pagy(transactions)
   end
 
   def sync
