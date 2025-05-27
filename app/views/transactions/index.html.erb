@@ -10,6 +10,7 @@
     <tr>
       <th scope="col">Time</th>
       <th scope="col">Description</th>
+      <th scope="col">MCC</th>
       <th scope="col">Amount</th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
       <tr>
         <td><%= currency_date(transaction.time_int) %> </td>
         <td><%= transaction.description %></td>
+        <td><%= transaction.mcc %></td>
         <td><%= (transaction.amount / 100.0).round(2) %></td>
       </tr>
     <% end %>
