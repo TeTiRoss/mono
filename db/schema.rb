@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_27_135549) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_27_180121) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -31,8 +31,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_27_135549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "mono_id"
-    t.integer "time"
+    t.integer "time_int"
     t.text "description"
+    t.integer "amount"
+    t.integer "mcc"
+    t.integer "original_mcc"
+    t.integer "currency_code"
     t.index ["mono_id"], name: "index_transactions_on_mono_id", unique: true
   end
 end

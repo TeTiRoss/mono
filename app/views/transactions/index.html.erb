@@ -16,9 +16,9 @@
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= currency_date(transaction.time) %> </td>
+        <td><%= currency_date(transaction.time_int) %> </td>
         <td><%= transaction.description %></td>
-        <td><%= (transaction.raw_data['amount'] / 100.0).round(2) %></td>
+        <td><%= (transaction.amount / 100.0).round(2) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,6 +26,37 @@
 
 <div class="d-flex justify-content-start mt-2">
   <%== pagy_bootstrap_nav(@pagy) %>
+
+  <%= button_to 'Sync', sync_transactions_path, method: :post, class: 'btn btn-outline-dark' %>
 </div>
 
-<%= button_to 'Sync', sync_transactions_path, method: :post, class: 'btn btn-outline-dark' %>
+<div class="container my-3">
+  <div class="row text-center g-2">
+    <div class="col-md-4">
+      <div class="card bg-dark text-white shadow-sm border-0 p-2">
+        <div class="card-body p-2">
+          <small class="text-light">Total transactions</small>
+          <h5 class="my-1 text-info"><%= @pagy.count %></h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card bg-dark text-white shadow-sm border-0 p-2">
+        <div class="card-body p-2">
+          <small class="text-light">Total Spent</small>
+          <h5 class="my-1 text-danger"><%= Money.new(@total_spent, "UAH").format %></h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card bg-dark text-white shadow-sm border-0 p-2">
+        <div class="card-body p-2">
+          <small class="text-light">Total Income</small>
+          <h5 class="my-1 text-success"><%= Money.new(@total_income, "UAH").format %></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
