@@ -10,6 +10,10 @@
   </head>
 
   <body>
+    <% if flash[:notice] %>
+      <div class="alert alert-secondary"><%= flash[:notice] %></div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
