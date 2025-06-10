@@ -4,5 +4,5 @@
 
 
 ToDo:
-- [ ] Add ability to search through transactions
+- [x] Add ability to search through transactions
 - [ ] Add rake task to load all transcations for given period
