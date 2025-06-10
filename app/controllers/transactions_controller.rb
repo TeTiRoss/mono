@@ -2,6 +2,7 @@ class TransactionsController < ApplicationController
   def index
     transactions = Transaction.order(time_int: :desc)
     transactions = transactions.where("description ILIKE :q", q: "%#{params[:query]}%") if params[:query].present?
+    transactions = transactions.where(mcc: params[:mcc]) if params[:mcc].present?
 
     @total_spent  = transactions.where('amount < 0').sum(:amount) * -1
     @total_income = transactions.where('amount > 0').sum(:amount)

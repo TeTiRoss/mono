@@ -1,6 +1,7 @@
 <%= form_with url: transactions_path, method: :get, local: true, class: "mb-3" do %>
   <div class="input-group">
     <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search by description..." %>
+    <%= number_field_tag :mcc, params[:mcc], class: "form-control", placeholder: "Search by MCC code..." %>
     <button class="btn btn-outline-dark" type="submit">Search</button>
   </div>
 <% end %>
