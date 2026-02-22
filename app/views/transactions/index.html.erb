@@ -28,10 +28,16 @@
   </tbody>
 </table>
 
-<div class="d-flex justify-content-start mt-2">
+<div class="d-flex justify-content-start align-items-start flex-wrap gap-2 mt-2">
   <%== pagy_bootstrap_nav(@pagy) %>
 
-  <%= button_to 'Sync', sync_transactions_path, method: :post, class: 'btn btn-outline-dark' %>
+  <%= form_with url: sync_transactions_path, method: :post, local: true do %>
+    <div class="input-group">
+      <%= submit_tag "Sync", class: "btn btn-outline-dark" %>
+      <%= date_field_tag :from_date, params[:from_date].presence || 1.week.ago.to_date, class: "form-control" %>
+      <%= date_field_tag :to_date, params[:to_date].presence || Date.current, class: "form-control" %>
+    </div>
+  <% end %>
 </div>
 
 <div class="container my-3">
