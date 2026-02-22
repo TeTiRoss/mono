@@ -2,6 +2,8 @@
   <div class="input-group">
     <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search by description..." %>
     <%= number_field_tag :mcc, params[:mcc], class: "form-control no-spinners", placeholder: "Search by MCC code...", inputmode: "numeric" %>
+    <%= date_field_tag :filter_from_date, params[:filter_from_date], class: "form-control" %>
+    <%= date_field_tag :filter_to_date, params[:filter_to_date].presence || Date.current, class: "form-control" %>
     <button class="btn btn-outline-dark" type="submit">Search</button>
   </div>
 <% end %>
