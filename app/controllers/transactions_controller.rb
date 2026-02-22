@@ -1,9 +1,10 @@
 class TransactionsController < ApplicationController
   def index
-    transactions = Transaction.order(time_int: :desc)
+    transactions = Transaction.all
     transactions = transactions.where("description ILIKE :q", q: "%#{params[:query]}%") if params[:query].present?
     transactions = transactions.where(mcc: params[:mcc]) if params[:mcc].present?
     transactions = apply_date_filter(transactions)
+    transactions = apply_sorting(transactions)
 
     @total_spent  = transactions.where('amount < 0').sum(:amount) * -1
     @total_income = transactions.where('amount > 0').sum(:amount)
@@ -34,6 +35,42 @@ class TransactionsController < ApplicationController
     transactions = transactions.where('time_int >= ?', from_time.to_i) if from_time
     transactions = transactions.where('time_int <= ?', to_time.to_i) if to_time
     transactions
+  end
+
+  def apply_sorting(transactions)
+    prepare_sorting_state
+
+    sort_key = @sort_key
+    direction = @sort_direction
+
+    case sort_key
+    when 'amount'
+      transactions.order(amount: direction, time_int: :desc)
+    when 'time'
+      transactions.order(time_int: direction)
+    else
+      transactions.order(time_int: :desc)
+    end
+  end
+
+  def prepare_sorting_state
+    @sort_key = params[:sort]
+    @sort_direction = params[:direction] == 'asc' ? :asc : :desc
+
+    current_direction = @sort_direction == :asc ? 'asc' : 'desc'
+    base_query = request.query_parameters.except('page')
+
+    time_sort_active = @sort_key == 'time' || @sort_key.blank?
+    effective_time_direction = @sort_key == 'time' ? current_direction : 'desc'
+    next_time_direction = time_sort_active && effective_time_direction == 'asc' ? 'desc' : 'asc'
+    @time_sort_label = "Time#{time_sort_active ? " #{effective_time_direction == 'asc' ? '↑' : '↓'}" : ''}"
+    @time_sort_params = base_query.merge(sort: 'time', direction: next_time_direction)
+
+    amount_sort_active = @sort_key == 'amount'
+    effective_amount_direction = amount_sort_active ? current_direction : 'desc'
+    next_amount_direction = amount_sort_active && effective_amount_direction == 'asc' ? 'desc' : 'asc'
+    @amount_sort_label = "Amount#{amount_sort_active ? " #{effective_amount_direction == 'asc' ? '↑' : '↓'}" : ''}"
+    @amount_sort_params = base_query.merge(sort: 'amount', direction: next_amount_direction)
   end
 
   def parse_sync_period(from_date, to_date)
