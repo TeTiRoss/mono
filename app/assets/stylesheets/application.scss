@@ -146,13 +146,13 @@ body {
 }
 
 .pagination .page-item:first-child .page-link {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
 }
 
 .pagination .page-item:last-child .page-link {
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
 }
 
 .no-spinners::-webkit-inner-spin-button,
