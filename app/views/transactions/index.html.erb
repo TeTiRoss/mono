@@ -85,6 +85,35 @@
   </div>
 </div>
 
+<section class="content-card mt-4">
+  <h3 class="section-title">Top Spent Categories</h3>
+  <p class="section-subtitle mb-3">Highest spending categories for the selected filters.</p>
+
+  <% if @top_spent_categories.any? %>
+    <% max_amount = @top_spent_categories.map { |category| category[:amount] }.max.to_f %>
+    <div class="top-spent-chart-wrap d-flex flex-column gap-3">
+      <% @top_spent_categories.each do |category| %>
+        <% percent = max_amount.positive? ? ((category[:amount].to_f / max_amount) * 100).round(2) : 0 %>
+        <% category_filter_params = @category_filter_base_params.merge(mcc: category[:mcc]) %>
+        <% active_category = params[:mcc].to_s == category[:mcc].to_s %>
+        <div class="top-spent-bar-row">
+          <div class="d-flex justify-content-between align-items-center mb-1 gap-2">
+            <%= link_to category[:name],
+                        transactions_path(category_filter_params),
+                        class: "top-spent-label #{'top-spent-label-active' if active_category}" %>
+            <span class="top-spent-value"><%= Money.from_cents(category[:amount].to_i, "UAH").format %></span>
+          </div>
+          <div class="top-spent-bar-track">
+            <div class="top-spent-bar-fill" style="width: <%= percent %>%"></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-light mb-0">No spending data for the selected filters.</p>
+  <% end %>
+</section>
+
 <div class="mb-4">
   <%= form_with url: sync_transactions_path, method: :post, local: true, class: "content-card ui-block p-3 row g-2 align-items-end w-100 mt-3 mx-0" do %>
     <div class="col-12">

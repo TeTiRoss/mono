@@ -6,11 +6,13 @@ class TransactionsController < ApplicationController
     transactions = Transaction.all
     transactions = transactions.where("description ILIKE :q", q: "%#{params[:query]}%") if params[:query].present?
     transactions = transactions.where(mcc: params[:mcc]) if params[:mcc].present?
-    transactions = apply_date_filter(transactions)
-    transactions = apply_sorting(transactions)
+    filtered_transactions = apply_date_filter(transactions)
+    transactions = apply_sorting(filtered_transactions)
 
-    @total_spent  = transactions.where('amount < 0').sum(:amount) * -1
-    @total_income = transactions.where('amount > 0').sum(:amount)
+    @total_spent  = filtered_transactions.where('amount < 0').sum(:amount) * -1
+    @total_income = filtered_transactions.where('amount > 0').sum(:amount)
+    @category_filter_base_params = request.query_parameters.except('page')
+    @top_spent_categories = build_top_spent_categories(filtered_transactions)
     @pagy, @transactions = pagy(transactions)
   end
 
@@ -98,4 +100,28 @@ class TransactionsController < ApplicationController
   def latest_transaction_date
     Transaction.maximum(:time_int)&.then { |timestamp| Time.zone.at(timestamp).to_date }
   end
+
+  def build_top_spent_categories(transactions)
+    transactions
+      .where('amount < 0')
+      .group(:mcc)
+      .sum('ABS(amount)')
+      .sort_by { |_, amount| -amount }
+      .first(8)
+      .map do |mcc, amount|
+        {
+          mcc: mcc,
+          name: category_label_for_mcc(mcc),
+          amount: amount
+        }
+      end
+  end
+
+  def category_label_for_mcc(mcc)
+    description = MCC.code(mcc)&.usda_description.to_s.strip
+    return "MCC #{mcc}" if description.blank?
+
+    description
+  end
+
 end
