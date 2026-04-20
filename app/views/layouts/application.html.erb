@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>mono</title>
+    <title>Mono Helper</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <%= stylesheet_link_tag :application, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <% if flash[:notice] %>
-      <div class="alert alert-secondary"><%= flash[:notice] %></div>
-    <% end %>
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="container py-3">
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+            <div>
+              <h1 class="app-title mb-1">Mono Helper</h1>
+              <p class="app-subtitle mb-0">Track transactions and monitor currency rates</p>
+            </div>
+            <nav class="d-flex gap-2 app-nav">
+              <%= link_to "Transactions", transactions_path, class: "btn btn-sm btn-outline-light" %>
+              <%= link_to "Currency Rates", currency_rates_path, class: "btn btn-sm btn-outline-light" %>
+            </nav>
+          </div>
+        </div>
+      </header>
 
-    <%= yield %>
+      <main class="container py-4">
+        <% if flash[:notice] %>
+          <div class="alert alert-info border-0 shadow-sm"><%= flash[:notice] %></div>
+        <% end %>
+
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>

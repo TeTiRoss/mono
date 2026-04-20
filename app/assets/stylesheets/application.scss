@@ -1,20 +1,148 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
+:root {
+  --block-radius: 12px;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #0f172a 0%, #111827 60%, #0b1220 100%);
+  color: #e5e7eb;
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-header {
+  background: rgba(15, 23, 42, 0.9);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.app-subtitle {
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+.app-nav .btn {
+  border-radius: 8px !important;
+}
+
+.content-card {
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: var(--block-radius);
+  box-shadow: 0 14px 30px rgba(2, 6, 23, 0.25);
+  padding: 1rem;
+}
+
+.ui-block {
+  border-radius: var(--block-radius);
+}
+
+.stats-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 92px;
+  padding: 1rem;
+}
+
+.section-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.section-subtitle {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.form-control {
+  border-radius: 8px;
+  border-color: rgba(148, 163, 184, 0.35);
+  background-color: rgba(15, 23, 42, 0.7);
+  color: #f8fafc;
+}
+
+.form-control::placeholder {
+  color: #94a3b8;
+}
+
+.form-control:focus {
+  background-color: rgba(15, 23, 42, 0.9);
+  color: #f8fafc;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 0.2rem rgba(96, 165, 250, 0.2);
+}
+
+.form-label {
+  color: #cbd5e1;
+}
+
+.btn {
+  border-radius: 8px !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1d4ed8, #0284c7);
+}
+
+.app-table {
+  margin-bottom: 0;
+  color: #e5e7eb;
+}
+
+.app-table thead th {
+  background-color: rgba(15, 23, 42, 0.85);
+  color: #cbd5e1;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.app-table td {
+  border-color: rgba(148, 163, 184, 0.15);
+}
+
+.table-link {
+  color: #bfdbfe;
+  text-decoration: none;
+}
+
+.table-link:hover {
+  color: #dbeafe;
+  text-decoration: underline;
+}
+
 .pagination .page-link {
-  background-color: #343a40; /* Bootstrap dark background */
-  color: #fff;
-  border-color: #454d55;
+  background-color: rgba(30, 41, 59, 0.95);
+  color: #e2e8f0;
+  border-color: rgba(148, 163, 184, 0.2);
 }
 
 .pagination .page-link:hover {
-  background-color: #495057;
-  color: #fff;
+  background-color: rgba(51, 65, 85, 0.95);
+  color: #f8fafc;
 }
 
 .pagination .page-item.active .page-link {
-  background-color: #212529;
-  border-color: #343a40;
+  background-color: #2563eb;
+  border-color: #1d4ed8;
 }
 
 .pagination .page-item:first-child .page-link {
@@ -25,14 +153,6 @@
 .pagination .page-item:last-child .page-link {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
-}
-
-body {
-  margin: 10px;
-}
-
-.btn {
-  border-radius: 0 !important;
 }
 
 .no-spinners::-webkit-inner-spin-button,
