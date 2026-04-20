@@ -13,7 +13,7 @@
     </div>
     <div class="col-6 col-md-2">
       <%= label_tag :filter_from_date, "From", class: "form-label text-light small mb-1" %>
-      <%= date_field_tag :filter_from_date, params[:filter_from_date], class: "form-control" %>
+      <%= date_field_tag :filter_from_date, params[:filter_from_date].presence || @default_filter_from_date, class: "form-control" %>
     </div>
     <div class="col-6 col-md-2">
       <%= label_tag :filter_to_date, "To", class: "form-label text-light small mb-1" %>
@@ -92,7 +92,7 @@
     </div>
     <div class="col-6 col-md-4">
       <%= label_tag :from_date, "From", class: "form-label text-light small mb-1" %>
-      <%= date_field_tag :from_date, params[:from_date].presence || 1.week.ago.to_date, class: "form-control" %>
+      <%= date_field_tag :from_date, params[:from_date].presence || @default_sync_from_date, class: "form-control" %>
     </div>
     <div class="col-6 col-md-4">
       <%= label_tag :to_date, "To", class: "form-label text-light small mb-1" %>

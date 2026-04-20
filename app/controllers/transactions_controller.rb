@@ -1,5 +1,8 @@
 class TransactionsController < ApplicationController
   def index
+    @default_filter_from_date = first_transaction_date
+    @default_sync_from_date = latest_transaction_date || 1.week.ago.to_date
+
     transactions = Transaction.all
     transactions = transactions.where("description ILIKE :q", q: "%#{params[:query]}%") if params[:query].present?
     transactions = transactions.where(mcc: params[:mcc]) if params[:mcc].present?
@@ -74,7 +77,7 @@ class TransactionsController < ApplicationController
   end
 
   def parse_sync_period(from_date, to_date)
-    from_value = from_date.presence || 1.week.ago.to_date.iso8601
+    from_value = from_date.presence || latest_transaction_date&.iso8601 || 1.week.ago.to_date.iso8601
     to_value   = to_date.presence || Date.current.iso8601
 
     parse_date_range(from_value, to_value)
@@ -86,5 +89,13 @@ class TransactionsController < ApplicationController
     [from_time, to_time]
   rescue ArgumentError, TypeError
     [nil, nil]
+  end
+
+  def first_transaction_date
+    Transaction.minimum(:time_int)&.then { |timestamp| Time.zone.at(timestamp).to_date }
+  end
+
+  def latest_transaction_date
+    Transaction.maximum(:time_int)&.then { |timestamp| Time.zone.at(timestamp).to_date }
   end
 end
