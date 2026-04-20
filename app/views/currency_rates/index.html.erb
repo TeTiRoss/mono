@@ -1,32 +1,37 @@
-<table class="table table-hover table-striped table-dark">
+<section class="content-card">
+  <h2 class="section-title">Currency Rates</h2>
+  <p class="section-subtitle mb-3">Current exchange rates from Monobank public API.</p>
+
   <% if @currency_rates.present? %>
-    <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col">Buy</th>
-        <th scope="col">Sell</th>
-        <th scope="col">Cross</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @currency_rates.each do |currency| %>
-        <tr>
-          <td><%= currency_name(currency['currencyCodeA']) %></td>
-          <td><%= currency_name(currency['currencyCodeB']) %></td>
-          <td><%= currency_date(currency['date']) %></td>
-          <td><%= currency['rateBuy'] %></td>
-          <td><%= currency['rateSell'] %></td>
-          <td><%= currency['rateCross'] %></td>
-        </tr>
-      <% end %>
-    </tbody>
+    <div class="table-responsive">
+      <table class="table table-dark table-hover table-striped align-middle mb-0 app-table">
+        <thead>
+          <tr>
+            <th scope="col">Currency A</th>
+            <th scope="col">Currency B</th>
+            <th scope="col">Updated At</th>
+            <th scope="col">Buy</th>
+            <th scope="col">Sell</th>
+            <th scope="col">Cross</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @currency_rates.each do |currency| %>
+            <tr>
+              <td><%= currency_name(currency['currencyCodeA']) %></td>
+              <td><%= currency_name(currency['currencyCodeB']) %></td>
+              <td><%= currency_date(currency['date']) %></td>
+              <td><%= currency['rateBuy'] || "-" %></td>
+              <td><%= currency['rateSell'] || "-" %></td>
+              <td><%= currency['rateCross'] || "-" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   <% else %>
-    <tbody>
-      <tr>
-        <td class="text-center"> No currencies available. Please, try again in a minute. </td>
-      </tr>
-    </tbody>
+    <div class="alert alert-secondary mb-0 text-center border-0">
+      No currencies available. Please try again in a minute.
+    </div>
   <% end %>
-</table>
+</section>
