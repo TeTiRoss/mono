@@ -90,7 +90,7 @@ GEM
     csv (3.3.5)
     date (3.5.1)
     drb (2.2.3)
-    erb (6.0.3)
+    erb (6.0.4)
     erubi (1.13.1)
     ffi (1.17.4)
     foreman (0.90.0)
