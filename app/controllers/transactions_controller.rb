@@ -11,7 +11,7 @@ class TransactionsController < ApplicationController
 
     @total_spent  = filtered_transactions.where('amount < 0').sum(:amount) * -1
     @total_income = filtered_transactions.where('amount > 0').sum(:amount)
-    @category_filter_base_params = request.query_parameters.except('page')
+    @filter_base_params = request.query_parameters.except('page')
     @top_spent_categories = build_top_spent_categories(filtered_transactions)
     @pagy, @transactions = pagy(transactions)
   end

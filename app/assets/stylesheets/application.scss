@@ -129,6 +129,16 @@ body {
   text-decoration: underline;
 }
 
+.table-filter-link {
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.table-filter-link:hover {
+  color: #f8fafc;
+  text-decoration: underline;
+}
+
 .pagination .page-link {
   background-color: rgba(30, 41, 59, 0.95);
   color: #e2e8f0;
